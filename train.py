@@ -8,7 +8,8 @@ from sklearn.model_selection import train_test_split
 from Models.SkipGram import SkipGram 
 
 df = pd.read_csv('data/processed_data/idx_pairs.csv')
-data_train = df['Center Word Index', 'Target Word Index']
+index_pairs = df.values
+vocabulary_size = 11343 #todo dynamic import
 
 # split data into train, validation and test (70/15/15)
 data_train, data_test = train_test_split(index_pairs, test_size=0.30, random_state=42)
@@ -28,7 +29,7 @@ loss_function = nn.NLLLoss()
 optimizer = optim.SGD(model.parameters(), lr=learning_rate)
 # optimizer = optim.Adam(model.parameters(), lr=learning_rate)
 
-print(len(data_train))
+# print(len(data_train))
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 print(device)
@@ -38,7 +39,7 @@ data_train = torch.tensor(data_train).to(device)
 for epoch in range(num_epochs):
   total_loss = 0
   print('epoch: {0}'.format(epoch) )
-  for x, y in data_train[:100]:
+  for x, y in data_train:
     model.zero_grad()
     x = torch.tensor(x, dtype=torch.long)
     log_probs = model(x)

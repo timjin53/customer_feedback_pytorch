@@ -36,6 +36,8 @@ for tokenized_comment in tokenized_comments:
       else:
         index_pairs.append([indices[center_word_position], indices[context_word_position]])
 
+print(vocabulary_size)
+
 index_pairs = np.array(index_pairs)
 df = pd.DataFrame({'Center Word Index': index_pairs[:, 0], 'Target Word Index': index_pairs[:, 1]})
-df.to_csv('processed_data/idx_pairs.csv')
+df.to_csv('processed_data/idx_pairs.csv', index=False)

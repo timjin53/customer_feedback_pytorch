@@ -3,10 +3,10 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 class SkipGram(nn.Module):
-  def __init__(self, num_embeddings, embedding_dim, output_size):
+  def __init__(self, vocab_size, embedding_dim):
     super(SkipGram, self).__init__()
-    self.embedding_layer = nn.Embedding(num_embeddings, embedding_dim)
-    self.fc_layer = nn.Linear(embedding_dim, output_size)
+    self.embedding_layer = nn.Embedding(vocab_size, embedding_dim)
+    self.fc_layer = nn.Linear(embedding_dim, vocab_size)
 
   def forward(self, x):
     x = self.embedding_layer(x)

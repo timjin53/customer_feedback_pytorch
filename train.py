@@ -39,7 +39,7 @@ print(device)
 data_train = torch.tensor(data_train)
 # print(len(data_train)) =>795216
 num_batch = int(np.ceil(len(data_train)/batch_size))
-model.to(device)
+# model.to(device)
 
 # batch training
 for epoch in range(num_epochs):
@@ -49,8 +49,12 @@ for epoch in range(num_epochs):
     print('epoch: {0}/{1}, batch: {2}/{3}'.format(epoch+1, num_epochs, batch+1, num_batch))
     batch_loss = 0
     startIndex = batch*batch_size
-    x = data_train[startIndex:startIndex+batch_size, 0].to(device)
-    y = data_train[startIndex:startIndex+batch_size, 1].to(device)
+    x = data_train[startIndex:startIndex+batch_size, 0]
+    y = data_train[startIndex:startIndex+batch_size, 1]
+
+    x = x.to(device)
+    y = y.to(device)
+
     model.zero_grad()
     x = torch.tensor(x, dtype=torch.long)
     log_probs = model(x)

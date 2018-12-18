@@ -23,7 +23,7 @@ data_test, data_validation = train_test_split(data_test, test_size=0.5, random_s
 # Hyper params
 embedding_size = 300
 num_epochs = 2
-learning_rate = 0.0001
+learning_rate = 0.05
 batch_size = 512
 
 model = SkipGram(vocab_size=vocabulary_size, 

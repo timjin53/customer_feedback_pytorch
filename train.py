@@ -57,7 +57,7 @@ for epoch in range(num_epochs):
 
     model.zero_grad()
     x = torch.tensor(x, dtype=torch.long)
-    log_probs = model(x)
+    log_probs = model(x).to(device)
     loss = loss_function(log_probs, torch.tensor(y))
     loss.backward()
     optimizer.step()
